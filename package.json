@@ -1,7 +1,8 @@
 {
-  "name": "mongoStore",
+  "name": "hemeramongo",
   "version": "0.0.1",
   "description": "This is a mongo store plugin for hemera",
+  "git repository": "https://github.com/Luke-Tang/mongoStore.git",
   "main": "index.js",
   "scripts": {
     "lint": "standard index.js",
