@@ -1,38 +1,36 @@
-'use strict'
+/* eslint-disable indent */
+"use strict"
 
-const Hp = require('hemera-plugin')
-const Mongodb = require('mongodb')
-const MongoStore = require('./lib/store')
+const Hp = require("hemera-plugin")
+const Mongodb = require("mongodb")
+const MongoStore = require("./lib/store")
 
-
-exports.plugin = Hp(function hemeraMongo(options, next) {
+exports.plugin = Hp(function hemeraMongo (options, next) {
     const hemera = this
     Mongodb.MongoClient.connect(options.mongo.url, options.mongos.options, function (err, db) {
         if (err) {
-            return hemera.emit('error', err)
+            return hemera.emit("error", err)
         }
-
         const mongoStore = new MongoStore(db, options)
-
-        hemera.expose('$mongoStore', mongoStore)
+        hemera.expose("$mongoStore", mongoStore)
 
         // Gracefully shutdown
-        hemera.ext('onClose', (ctx, done) => {
-            hemera.log.debug('Mongodb connection closed!')
+        hemera.ext("onClose", (ctx, done) => {
+            hemera.log.debug("Mongodb connection closed!")
             db.close(done)
         })
 
-        hemera.log.debug('DB connected!')
+        hemera.log.debug("DB connected!")
         next()
     })
 })
 
 exports.options = {
-    payloadValidator: 'hemera-joi',
+    payloadValidator: "hemera-joi",
     mongos: {},
     // serializeResult: false,
     mongo: {
-        url: 'mongodb://localhost:27017/'
+        url: "mongodb://localhost:27017/"
     },
     store: {
         create: {},
@@ -42,11 +40,11 @@ exports.options = {
         findById: {},
         remove: {},
         removeById: {},
-        replace: { upsert: true },
+        replace: {upsert: true},
         replaceById: {}
     }
 }
 
 exports.attributes = {
-    pkg: require('./package.json')
+    pkg: require("./package.json")
 }
