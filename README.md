@@ -1,10 +1,13 @@
 # mongoStore
 
-Your plugin description
+This is a plugin to use Mongodb with Hemera. All CURD is directly manipulate the database driver
 
 # Prerequisites
 
-[Install and run NATS Server](http://nats.io/documentation/tutorials/gnatsd-install/)
+1. [Install and run NATS Server](http://nats.io/documentation/tutorials/gnatsd-install/)
+
+2. Start mongodb
+
 
 # Example
 
@@ -12,23 +15,29 @@ Your plugin description
 'use strict'
 
 const Hemera = require('nats-hemera')
-const Plugin = require('hemera-mongo')
+const hemeraMongo = require('hemeramongo')
 const nats = require('nats').connect()
 
 const hemera = new Hemera(nats, {
   logLevel: 'info'
 })
 
-hemera.use(Plugin)
+hemera.use(hemeraMongo, {
+  mongo: {
+    url: "mongodb://localhost:27017/test",
+  },
+})
+    
 
 hemera.ready(() => {
-  hemera.act({
-    topic: 'mongo',
-    cmd: 'add',
-    a: 1,
-    b: 2
-  }, function (err, resp) {
-    this.log.info(resp, 'Result')
+  const mongoStore = hemera.exposition.hemeramongo.$mongoStore
+  mongoStore.create({
+    collection: "test",
+    data: {
+      name: "peter",
+    }
+  }, function(err, resp) {
+    hemera.log.info(resp, 'Query result')
   })
 })
 

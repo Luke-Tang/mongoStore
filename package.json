@@ -19,19 +19,20 @@
     "hemera-joi": "1.x",
     "hemera-plugin": "^0.0.2",
     "hemera-store": "^1.1.14",
+    "lodash": "^4.17.4",
     "mongodb": "^2.2.31"
   },
   "peerDependencies": {
     "nats-hemera": "1.x"
   },
   "devDependencies": {
-    "code": "4.0.x",
+    "chai": "^4.1.1",
     "hemera-testsuite": "1.x",
     "istanbul": "0.4.x",
     "mocha": "3.2.x",
     "mocha-lcov-reporter": "1.2.x",
-    "nyc": "10.3.x",
+    "nats": "0.7.x",
     "nats-hemera": "1.x",
-    "nats": "0.7.x"
+    "nyc": "10.3.x"
   }
 }
