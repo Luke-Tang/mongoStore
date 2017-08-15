@@ -2,7 +2,9 @@
   "name": "hemeramongo",
   "version": "0.0.2",
   "description": "This is a mongo store plugin for hemera",
-  "git repository": "https://github.com/Luke-Tang/mongoStore.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Luke-Tang/mongoStore.git",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
